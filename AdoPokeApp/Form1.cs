@@ -8,14 +8,44 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using domain;
+using service;
 
 namespace AdoPokeApp
 {
     public partial class AdoPokeApp : Form
     {
+        private List<Pokemon> pokeList;
         public AdoPokeApp()
         {
             InitializeComponent();
+        }
+
+        private void AdoPokeApp_Load(object sender, EventArgs e)
+        {
+            PokeServices service = new PokeServices();
+            pokeList = service.list();
+            dgvPokemons.DataSource = pokeList;
+            dgvPokemons.Columns["UrlImage"].Visible = false;
+            loadImage(pokeList[0].UrlImage);
+        }
+
+        private void dgvPokemons_SelectionChanged(object sender, EventArgs e)
+        {
+            Pokemon selected = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
+            loadImage(selected.UrlImage);
+        }
+
+        private void loadImage(string image)
+        {
+            try
+            {
+                pbxPokemon.Load(image);
+            }
+            catch (Exception ex)
+            {
+
+                pbxPokemon.Load("https://pbs.twimg.com/media/ERPDVqzWAAUwLRl.png");
+            }
         }
     }
 }

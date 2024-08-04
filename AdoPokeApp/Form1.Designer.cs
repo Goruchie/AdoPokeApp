@@ -29,21 +29,50 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdoPokeApp));
+            this.dgvPokemons = new System.Windows.Forms.DataGridView();
+            this.pbxPokemon = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPokemons)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxPokemon)).BeginInit();
             this.SuspendLayout();
+            // 
+            // dgvPokemons
+            // 
+            this.dgvPokemons.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPokemons.Location = new System.Drawing.Point(12, 81);
+            this.dgvPokemons.Name = "dgvPokemons";
+            this.dgvPokemons.Size = new System.Drawing.Size(567, 289);
+            this.dgvPokemons.TabIndex = 0;
+            this.dgvPokemons.SelectionChanged += new System.EventHandler(this.dgvPokemons_SelectionChanged);
+            // 
+            // pbxPokemon
+            // 
+            this.pbxPokemon.Location = new System.Drawing.Point(606, 81);
+            this.pbxPokemon.Name = "pbxPokemon";
+            this.pbxPokemon.Size = new System.Drawing.Size(327, 289);
+            this.pbxPokemon.TabIndex = 1;
+            this.pbxPokemon.TabStop = false;
             // 
             // AdoPokeApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(945, 450);
+            this.Controls.Add(this.pbxPokemon);
+            this.Controls.Add(this.dgvPokemons);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AdoPokeApp";
             this.Text = "AdoPokeApp";
+            this.Load += new System.EventHandler(this.AdoPokeApp_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPokemons)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxPokemon)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridView dgvPokemons;
+        private System.Windows.Forms.PictureBox pbxPokemon;
     }
 }
 
