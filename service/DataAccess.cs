@@ -45,6 +45,22 @@ namespace service
             }
         }
 
+        public void runAction()
+        {
+            sqlCommand.Connection = connection;
+
+            try
+            {
+                connection.Open();
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         public void closeConnection()
         {
             if (reader != null)

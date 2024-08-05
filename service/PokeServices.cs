@@ -51,5 +51,44 @@ namespace service
                 throw ex;
             }
         }
+
+        public void add(Pokemon newone)
+        {
+            DataAccess data = new DataAccess();
+
+            try
+            {
+                data.setQuery("Insert into POKEMONS (Numero, Nombre, Descripcion, Activo)values(" + newone.Number + ", '" + newone.Name + "', '" + newone.Description + "', 1)");
+                data.runAction();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                data.closeConnection();
+            }
+        }
+        public void modify(Pokemon modified)
+        {
+            DataAccess data = new DataAccess();
+
+            try
+            {
+                data.setQuery("Update POKEMONS set Nombre = '" + modified.Name + "', Descripcion = '" + modified.Description + "' where Numero = " + modified.Number);
+                data.runReader();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                data.closeConnection();
+            }
+        }
     }
 }

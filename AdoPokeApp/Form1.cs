@@ -47,5 +47,11 @@ namespace AdoPokeApp
                 pbxPokemon.Load("https://pbs.twimg.com/media/ERPDVqzWAAUwLRl.png");
             }
         }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            frmPokeRegister register = new frmPokeRegister();
+            register.ShowDialog();
+        }
     }
 }
