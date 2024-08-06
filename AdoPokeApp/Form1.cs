@@ -27,8 +27,11 @@ namespace AdoPokeApp
 
         private void dgvPokemons_SelectionChanged(object sender, EventArgs e)
         {
-            Pokemon selected = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
-            loadImage(selected.UrlImage);
+            if(dgvPokemons.CurrentRow != null)
+            {
+                Pokemon selected = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
+                loadImage(selected.UrlImage);
+            }            
         }
 
         private void load()
@@ -38,8 +41,7 @@ namespace AdoPokeApp
             {
                 pokeList = service.list();
                 dgvPokemons.DataSource = pokeList;
-                dgvPokemons.Columns["UrlImage"].Visible = false;
-                dgvPokemons.Columns["Id"].Visible = false;
+                hideColumns();
                 loadImage(pokeList[0].UrlImage);
             }
             catch (Exception ex)
@@ -47,6 +49,12 @@ namespace AdoPokeApp
 
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void hideColumns()
+        {
+            dgvPokemons.Columns["UrlImage"].Visible = false;
+            dgvPokemons.Columns["Id"].Visible = false;
         }
 
         private void loadImage(string image)
@@ -113,6 +121,26 @@ namespace AdoPokeApp
 
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            List<Pokemon> filteredList;
+            string filter = txbFilter.Text;
+            if(filter != "")
+            {
+                filteredList = pokeList.FindAll(x => x.Name.ToUpper().Contains(filter.ToUpper()) || x.Type.Description.ToUpper().Contains(filter.ToUpper()));
+            }
+            else
+            {
+                filteredList = pokeList;
+            }
+
+            
+
+            dgvPokemons.DataSource = null;
+            dgvPokemons.DataSource = filteredList;
+            hideColumns();
         }
     }
 }

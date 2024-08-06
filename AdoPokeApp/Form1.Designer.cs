@@ -35,6 +35,9 @@
             this.btnModify = new System.Windows.Forms.Button();
             this.btnDeleteP = new System.Windows.Forms.Button();
             this.btnDeleteL = new System.Windows.Forms.Button();
+            this.lblFilter = new System.Windows.Forms.Label();
+            this.txbFilter = new System.Windows.Forms.TextBox();
+            this.btnSearch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPokemons)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxPokemon)).BeginInit();
             this.SuspendLayout();
@@ -100,11 +103,40 @@
             this.btnDeleteL.UseVisualStyleBackColor = true;
             this.btnDeleteL.Click += new System.EventHandler(this.btnDeleteL_Click);
             // 
+            // lblFilter
+            // 
+            this.lblFilter.AutoSize = true;
+            this.lblFilter.Location = new System.Drawing.Point(12, 56);
+            this.lblFilter.Name = "lblFilter";
+            this.lblFilter.Size = new System.Drawing.Size(32, 13);
+            this.lblFilter.TabIndex = 6;
+            this.lblFilter.Text = "Filter:";
+            // 
+            // txbFilter
+            // 
+            this.txbFilter.Location = new System.Drawing.Point(53, 53);
+            this.txbFilter.Name = "txbFilter";
+            this.txbFilter.Size = new System.Drawing.Size(169, 20);
+            this.txbFilter.TabIndex = 7;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(228, 51);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.TabIndex = 8;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
             // AdoPokeApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(945, 450);
+            this.Controls.Add(this.btnSearch);
+            this.Controls.Add(this.txbFilter);
+            this.Controls.Add(this.lblFilter);
             this.Controls.Add(this.btnDeleteL);
             this.Controls.Add(this.btnDeleteP);
             this.Controls.Add(this.btnModify);
@@ -118,6 +150,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPokemons)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxPokemon)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -129,6 +162,9 @@
         private System.Windows.Forms.Button btnModify;
         private System.Windows.Forms.Button btnDeleteP;
         private System.Windows.Forms.Button btnDeleteL;
+        private System.Windows.Forms.Label lblFilter;
+        private System.Windows.Forms.TextBox txbFilter;
+        private System.Windows.Forms.Button btnSearch;
     }
 }
 
