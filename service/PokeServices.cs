@@ -22,7 +22,7 @@ namespace service
             {
                 conection.ConnectionString = "server=.\\SQLEXPRESS; database=POKEDEX_DB; integrated security=true";
                 sqlCommand.CommandType = System.Data.CommandType.Text;
-                sqlCommand.CommandText = "Select Numero, Nombre, P.Descripcion, UrlImagen, E.Descripcion Tipo, D.Descripcion Debilidad\r\nFrom POKEMONS P, ELEMENTOS E, ELEMENTOS D\r\nWhere E.Id = P.IdTipo\r\nAnd D.Id = P.IdDebilidad";
+                sqlCommand.CommandText = "Select Numero, Nombre, P.Descripcion, UrlImagen, E.Descripcion Tipo, D.Descripcion Debilidad, P.IdTipo, P.IdDebilidad, P.Id\r\nFrom POKEMONS P, ELEMENTOS E, ELEMENTOS D\r\nWhere E.Id = P.IdTipo\r\nAnd D.Id = P.IdDebilidad";
                 sqlCommand.Connection = conection;
 
                 conection.Open();
@@ -31,6 +31,7 @@ namespace service
                 while (reader.Read())
                 {
                     Pokemon aux = new Pokemon();
+                    aux.Id = (int)reader["Id"];
                     aux.Number = reader.GetInt32(0);
                     aux.Name = (string)reader["Nombre"];
                     aux.Description = (string)reader["Descripcion"];
@@ -44,8 +45,10 @@ namespace service
                     aux.UrlImage = (string)reader["UrlImagen"];
 
                     aux.Type = new Element();
+                    aux.Type.Id = (int)reader["IdTipo"];
                     aux.Type.Description = (string)reader["Tipo"];
                     aux.Weakness = new Element();
+                    aux.Weakness.Id = (int)reader["IdDebilidad"];
                     aux.Weakness.Description = (string)reader["Debilidad"];
 
                     list.Add(aux);
@@ -82,14 +85,22 @@ namespace service
                 data.closeConnection();
             }
         }
-        public void modify(Pokemon modified)
+        public void modify(Pokemon poke)
         {
             DataAccess data = new DataAccess();
 
             try
             {
-                data.setQuery("Update POKEMONS set Nombre = '" + modified.Name + "', Descripcion = '" + modified.Description + "' where Numero = " + modified.Number);
-                data.runReader();
+                data.setQuery("update POKEMONS set Numero = @number, Nombre = @name, Descripcion = @desc, UrlImagen = @img, IdTipo = @idTipo, IdDebilidad = @idDebilidad Where id = @id");
+                data.setParameter("@number", poke.Number);
+                data.setParameter("@name", poke.Name);
+                data.setParameter("@desc", poke.Description);
+                data.setParameter("@img", poke.UrlImage);
+                data.setParameter("@idTipo", poke.Type.Id);
+                data.setParameter("@idDebilidad", poke.Weakness.Id);
+                data.setParameter("@id", poke.Id);
+
+                data.runAction();
             }
             catch (Exception ex)
             {

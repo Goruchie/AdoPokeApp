@@ -39,6 +39,7 @@ namespace AdoPokeApp
                 pokeList = service.list();
                 dgvPokemons.DataSource = pokeList;
                 dgvPokemons.Columns["UrlImage"].Visible = false;
+                dgvPokemons.Columns["Id"].Visible = false;
                 loadImage(pokeList[0].UrlImage);
             }
             catch (Exception ex)
@@ -65,6 +66,16 @@ namespace AdoPokeApp
         {
             frmPokeRegister register = new frmPokeRegister();
             register.ShowDialog();
+            load();
+        }
+
+        private void btnModify_Click(object sender, EventArgs e)
+        {
+            Pokemon selected;
+            selected = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
+
+            frmPokeRegister modify = new frmPokeRegister(selected);
+            modify.ShowDialog();
             load();
         }
     }

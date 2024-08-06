@@ -15,9 +15,16 @@ namespace AdoPokeApp
 {
     public partial class frmPokeRegister : Form
     {
+        private Pokemon pokemon = null;
         public frmPokeRegister()
         {
             InitializeComponent();
+        }
+        public frmPokeRegister(Pokemon pokemon)
+        {
+            InitializeComponent();
+            this.pokemon = pokemon;
+            Text = "Modify Pokemon";
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -27,20 +34,32 @@ namespace AdoPokeApp
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            Pokemon poke = new Pokemon();
+
             PokeServices service = new PokeServices();
 
             try
             {
-                poke.Number = int.Parse(txbNumber.Text);
-                poke.Name = txbName.Text;
-                poke.Description = txbDescription.Text;
-                poke.UrlImage = txbUrlImage.Text;
-                poke.Type = (Element)cboType.SelectedItem;
-                poke.Weakness = (Element)cboWeakness.SelectedItem;
+                if(pokemon == null)                
+                   pokemon = new Pokemon();
+                
+                pokemon.Number = int.Parse(txbNumber.Text);
+                pokemon.Name = txbName.Text;
+                pokemon.Description = txbDescription.Text;
+                pokemon.UrlImage = txbUrlImage.Text;
+                pokemon.Type = (Element)cboType.SelectedItem;
+                pokemon.Weakness = (Element)cboWeakness.SelectedItem;
 
-                service.add(poke);
-                MessageBox.Show("Added successfully");
+                if(pokemon.Id != 0)
+                {
+                    service.modify(pokemon);
+                    MessageBox.Show("Modified successfully");
+                }
+                else
+                {
+                    service.add(pokemon);
+                    MessageBox.Show("Added successfully");
+                }                                    
+
                 Close();
 
             }
@@ -57,7 +76,24 @@ namespace AdoPokeApp
             try
             {
                 cboType.DataSource = elementService.list();
+                cboType.ValueMember = "Id";
+                cboType.DisplayMember = "Description";
                 cboWeakness.DataSource = elementService.list();
+                cboWeakness.ValueMember = "Id";
+                cboWeakness.DisplayMember = "Description";
+
+                if (pokemon != null)
+                {
+                    txbNumber.Text = pokemon.Number.ToString();
+                    txbName.Text = pokemon.Name;
+                    txbDescription.Text = pokemon.Description;
+                    txbUrlImage.Text = pokemon.UrlImage;
+                    loadImage(pokemon.UrlImage);
+                    cboType.SelectedValue = pokemon.Type.Id;
+                    cboWeakness.SelectedValue = pokemon.Weakness.Id;
+                    
+                
+                }
             }
             catch (Exception ex)
             {
