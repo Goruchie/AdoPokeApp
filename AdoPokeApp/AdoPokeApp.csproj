@@ -52,8 +52,20 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPokeRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPokeRegister.Designer.cs">
+      <DependentUpon>frmPokeRegister.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPokeRegister.resx">
+      <DependentUpon>frmPokeRegister.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -75,6 +87,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\domain\domain.csproj">
+      <Project>{4d3baa78-b47c-4963-8ebe-d5afdc4ca378}</Project>
+      <Name>domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\service\service.csproj">
+      <Project>{264797d3-2c06-4638-8157-0ba707e03d80}</Project>
+      <Name>service</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
