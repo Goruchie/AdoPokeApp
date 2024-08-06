@@ -22,7 +22,7 @@ namespace service
             {
                 conection.ConnectionString = "server=.\\SQLEXPRESS; database=POKEDEX_DB; integrated security=true";
                 sqlCommand.CommandType = System.Data.CommandType.Text;
-                sqlCommand.CommandText = "Select Numero, Nombre, P.Descripcion, UrlImagen, E.Descripcion Tipo, D.Descripcion Debilidad, P.IdTipo, P.IdDebilidad, P.Id\r\nFrom POKEMONS P, ELEMENTOS E, ELEMENTOS D\r\nWhere E.Id = P.IdTipo\r\nAnd D.Id = P.IdDebilidad";
+                sqlCommand.CommandText = "Select Numero, Nombre, P.Descripcion, UrlImagen, E.Descripcion Tipo, D.Descripcion Debilidad, P.IdTipo, P.IdDebilidad, P.Id\r\nFrom POKEMONS P, ELEMENTOS E, ELEMENTOS D\r\nWhere E.Id = P.IdTipo\r\nAnd D.Id = P.IdDebilidad And P.Activo = 1";
                 sqlCommand.Connection = conection;
 
                 conection.Open();
@@ -119,6 +119,22 @@ namespace service
             {
                 DataAccess data = new DataAccess();
                 data.setQuery("delete from POKEMONS where id = @id");
+                data.setParameter("@id", id);
+                data.runAction();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public void deleteLogically(int id)
+        {
+            try
+            {
+                DataAccess data = new DataAccess();
+                data.setQuery("update POKEMONS set Activo = 0 where id = @id");
                 data.setParameter("@id", id);
                 data.runAction();
             }

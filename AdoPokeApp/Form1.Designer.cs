@@ -34,6 +34,7 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnModify = new System.Windows.Forms.Button();
             this.btnDeleteP = new System.Windows.Forms.Button();
+            this.btnDeleteL = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPokemons)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxPokemon)).BeginInit();
             this.SuspendLayout();
@@ -89,11 +90,22 @@
             this.btnDeleteP.UseVisualStyleBackColor = true;
             this.btnDeleteP.Click += new System.EventHandler(this.btnDeleteP_Click);
             // 
+            // btnDeleteL
+            // 
+            this.btnDeleteL.Location = new System.Drawing.Point(294, 390);
+            this.btnDeleteL.Name = "btnDeleteL";
+            this.btnDeleteL.Size = new System.Drawing.Size(113, 23);
+            this.btnDeleteL.TabIndex = 5;
+            this.btnDeleteL.Text = "Delete Logically";
+            this.btnDeleteL.UseVisualStyleBackColor = true;
+            this.btnDeleteL.Click += new System.EventHandler(this.btnDeleteL_Click);
+            // 
             // AdoPokeApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(945, 450);
+            this.Controls.Add(this.btnDeleteL);
             this.Controls.Add(this.btnDeleteP);
             this.Controls.Add(this.btnModify);
             this.Controls.Add(this.btnAdd);
@@ -116,6 +128,7 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnModify;
         private System.Windows.Forms.Button btnDeleteP;
+        private System.Windows.Forms.Button btnDeleteL;
     }
 }
 
