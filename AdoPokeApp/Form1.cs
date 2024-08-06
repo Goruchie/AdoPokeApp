@@ -22,6 +22,17 @@ namespace AdoPokeApp
 
         private void AdoPokeApp_Load(object sender, EventArgs e)
         {
+            load();
+        }
+
+        private void dgvPokemons_SelectionChanged(object sender, EventArgs e)
+        {
+            Pokemon selected = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
+            loadImage(selected.UrlImage);
+        }
+
+        private void load()
+        {
             PokeServices service = new PokeServices();
             try
             {
@@ -35,12 +46,6 @@ namespace AdoPokeApp
 
                 MessageBox.Show(ex.ToString());
             }
-        }
-
-        private void dgvPokemons_SelectionChanged(object sender, EventArgs e)
-        {
-            Pokemon selected = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
-            loadImage(selected.UrlImage);
         }
 
         private void loadImage(string image)
@@ -60,6 +65,7 @@ namespace AdoPokeApp
         {
             frmPokeRegister register = new frmPokeRegister();
             register.ShowDialog();
+            load();
         }
     }
 }
