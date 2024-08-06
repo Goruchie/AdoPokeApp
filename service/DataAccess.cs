@@ -61,6 +61,10 @@ namespace service
             }
         }
 
+        public void setParameter(string name, object value)
+        {
+            sqlCommand.Parameters.AddWithValue(name, value);
+        }
         public void closeConnection()
         {
             if (reader != null)

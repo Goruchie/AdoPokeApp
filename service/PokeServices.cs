@@ -58,7 +58,9 @@ namespace service
 
             try
             {
-                data.setQuery("Insert into POKEMONS (Numero, Nombre, Descripcion, Activo)values(" + newone.Number + ", '" + newone.Name + "', '" + newone.Description + "', 1)");
+                data.setQuery("Insert into POKEMONS (Numero, Nombre, Descripcion, Activo, IdTipo, IdDebilidad)values(" + newone.Number + ", '" + newone.Name + "', '" + newone.Description + "', 1, @idTipo, @idDebilidad)");
+                data.setParameter("@idTipo", newone.Type.Id);
+                data.setParameter("@idDebilidad", newone.Weakness.Id);
                 data.runAction();
             }
             catch (Exception ex)
