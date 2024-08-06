@@ -34,11 +34,28 @@ namespace AdoPokeApp
                 poke.Number = int.Parse(txbNumber.Text);
                 poke.Name = txbName.Text;
                 poke.Description = txbDescription.Text;
+                poke.Type = (Element)cboType.SelectedItem;
+                poke.Weakness = (Element)cboWeakness.SelectedItem;
 
                 service.add(poke);
                 MessageBox.Show("Added successfully");
                 Close();
 
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void frmPokeRegister_Load(object sender, EventArgs e)
+        {
+            ElementServices elementService = new ElementServices();
+            try
+            {
+                cboType.DataSource = elementService.list();
+                cboWeakness.DataSource = elementService.list();
             }
             catch (Exception ex)
             {
