@@ -78,5 +78,27 @@ namespace AdoPokeApp
             modify.ShowDialog();
             load();
         }
+
+        private void btnDeleteP_Click(object sender, EventArgs e)
+        {
+            PokeServices service = new PokeServices();
+            Pokemon selected;
+            try
+            {
+                DialogResult answer = MessageBox.Show("Are you sure you want to delete this Pokemon from the Data Base?", "Deleting", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if(answer == DialogResult.Yes)
+                {
+                    selected = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
+                    service.delete(selected.Id);
+                    load();
+                }              
+                
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }

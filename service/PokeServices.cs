@@ -112,5 +112,21 @@ namespace service
                 data.closeConnection();
             }
         }
+
+        public void delete(int id)
+        {
+            try
+            {
+                DataAccess data = new DataAccess();
+                data.setQuery("delete from POKEMONS where id = @id");
+                data.setParameter("@id", id);
+                data.runAction();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }
