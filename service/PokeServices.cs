@@ -34,7 +34,15 @@ namespace service
                     aux.Number = reader.GetInt32(0);
                     aux.Name = (string)reader["Nombre"];
                     aux.Description = (string)reader["Descripcion"];
+
+                    // First way to solve the problem when UrlImage is null
+                    //if(!(reader.IsDBNull(reader.GetOrdinal("UrlImagen"))))
+                    //aux.UrlImage = (string)reader["UrlImagen"];
+
+                    // Second way to solve the problem when UrlImage is null
+                    if (!(reader["UrlImagen"] is DBNull))
                     aux.UrlImage = (string)reader["UrlImagen"];
+
                     aux.Type = new Element();
                     aux.Type.Description = (string)reader["Tipo"];
                     aux.Weakness = new Element();

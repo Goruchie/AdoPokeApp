@@ -23,10 +23,18 @@ namespace AdoPokeApp
         private void AdoPokeApp_Load(object sender, EventArgs e)
         {
             PokeServices service = new PokeServices();
-            pokeList = service.list();
-            dgvPokemons.DataSource = pokeList;
-            dgvPokemons.Columns["UrlImage"].Visible = false;
-            loadImage(pokeList[0].UrlImage);
+            try
+            {
+                pokeList = service.list();
+                dgvPokemons.DataSource = pokeList;
+                dgvPokemons.Columns["UrlImage"].Visible = false;
+                loadImage(pokeList[0].UrlImage);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void dgvPokemons_SelectionChanged(object sender, EventArgs e)
