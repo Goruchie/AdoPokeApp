@@ -66,9 +66,10 @@ namespace service
 
             try
             {
-                data.setQuery("Insert into POKEMONS (Numero, Nombre, Descripcion, Activo, IdTipo, IdDebilidad)values(" + newone.Number + ", '" + newone.Name + "', '" + newone.Description + "', 1, @idTipo, @idDebilidad)");
+                data.setQuery("Insert into POKEMONS (Numero, Nombre, Descripcion, Activo, IdTipo, IdDebilidad, UrlImagen)values(" + newone.Number + ", '" + newone.Name + "', '" + newone.Description + "', 1, @idTipo, @idDebilidad, @urlImagen)");
                 data.setParameter("@idTipo", newone.Type.Id);
                 data.setParameter("@idDebilidad", newone.Weakness.Id);
+                data.setParameter("@urlImagen", newone.UrlImage);
                 data.runAction();
             }
             catch (Exception ex)

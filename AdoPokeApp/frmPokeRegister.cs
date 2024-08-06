@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using domain;
 using service;
 
+
 namespace AdoPokeApp
 {
     public partial class frmPokeRegister : Form
@@ -34,6 +35,7 @@ namespace AdoPokeApp
                 poke.Number = int.Parse(txbNumber.Text);
                 poke.Name = txbName.Text;
                 poke.Description = txbDescription.Text;
+                poke.UrlImage = txbUrlImage.Text;
                 poke.Type = (Element)cboType.SelectedItem;
                 poke.Weakness = (Element)cboWeakness.SelectedItem;
 
@@ -61,6 +63,24 @@ namespace AdoPokeApp
             {
 
                 MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void txbUrlImage_Leave(object sender, EventArgs e)
+        {
+            loadImage(txbUrlImage.Text);
+        }
+
+        private void loadImage(string image)
+        {
+            try
+            {
+                pbxPokemon.Load(image);
+            }
+            catch (Exception ex)
+            {
+
+                pbxPokemon.Load("https://pbs.twimg.com/media/ERPDVqzWAAUwLRl.png");
             }
         }
     }
