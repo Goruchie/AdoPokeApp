@@ -126,11 +126,51 @@ namespace AdoPokeApp
             }
         }
 
+        private bool validateFilter()
+        {
+            if(cboField.SelectedIndex < 0)
+            {
+                MessageBox.Show("You must select a field to filter");
+                return true;
+            }
+            if(cboCriteria.SelectedIndex < 0)
+            {
+                MessageBox.Show("You must select a criteria to filter");
+                return true;
+            }
+            if(cboField.SelectedItem.ToString() == "Number")
+            {
+                if(txbAdFilter.Text == "")
+                {
+                    MessageBox.Show("You must enter a number to filter");
+                    return true;
+                }
+                if(!(onlyNumbers(txbAdFilter.Text)))
+                {
+                    MessageBox.Show("Only numbers for a numeric field");
+                }
+                return true;
+            }
+            return false;
+        }
+
+        private bool onlyNumbers(string chain)
+        {
+            foreach (char character in chain)
+            {
+                if (!(char.IsNumber(character)))
+                    return false;
+            }
+            return false;
+        }
+
         private void btnSearch_Click(object sender, EventArgs e)
         {
             PokeServices service = new PokeServices();
             try
             {
+             if (validateFilter())
+                return;
             string field = cboField.SelectedItem.ToString();
             string criteria = cboCriteria.SelectedItem.ToString();
             string filter = txbAdFilter.Text;

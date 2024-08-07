@@ -96,9 +96,7 @@ namespace AdoPokeApp
                     txbUrlImage.Text = pokemon.UrlImage;
                     loadImage(pokemon.UrlImage);
                     cboType.SelectedValue = pokemon.Type.Id;
-                    cboWeakness.SelectedValue = pokemon.Weakness.Id;
-                    
-                
+                    cboWeakness.SelectedValue = pokemon.Weakness.Id;                                   
                 }
             }
             catch (Exception ex)
@@ -134,8 +132,6 @@ namespace AdoPokeApp
             {
                 txbUrlImage.Text = file.FileName;
                 loadImage(file.FileName);
-
-                //File.Copy(file.FileName, ConfigurationManager.AppSettings["images-folder"] + file.SafeFileName);
             }
         }
     }
