@@ -23,6 +23,9 @@ namespace AdoPokeApp
         private void AdoPokeApp_Load(object sender, EventArgs e)
         {
             load();
+            cboField.Items.Add("Number");
+            cboField.Items.Add("Name");
+            cboField.Items.Add("Description");
         }
 
         private void dgvPokemons_SelectionChanged(object sender, EventArgs e)
@@ -125,9 +128,31 @@ namespace AdoPokeApp
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            PokeServices service = new PokeServices();
+            try
+            {
+            string field = cboField.SelectedItem.ToString();
+            string criteria = cboCriteria.SelectedItem.ToString();
+            string filter = txbAdFilter.Text;
+            dgvPokemons.DataSource = service.filter(field, criteria, filter);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void txbFilter_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+        }
+
+        private void txbFilter_TextChanged(object sender, EventArgs e)
+        {
             List<Pokemon> filteredList;
             string filter = txbFilter.Text;
-            if(filter != "")
+            if (filter.Length >= 3)
             {
                 filteredList = pokeList.FindAll(x => x.Name.ToUpper().Contains(filter.ToUpper()) || x.Type.Description.ToUpper().Contains(filter.ToUpper()));
             }
@@ -136,11 +161,30 @@ namespace AdoPokeApp
                 filteredList = pokeList;
             }
 
-            
+
 
             dgvPokemons.DataSource = null;
             dgvPokemons.DataSource = filteredList;
             hideColumns();
+        }
+
+        private void cboField_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string option = cboField.SelectedItem.ToString();
+            if(option == "Number")
+            {
+                cboCriteria.Items.Clear();
+                cboCriteria.Items.Add("Bigger than");
+                cboCriteria.Items.Add("Smaller than");
+                cboCriteria.Items.Add("Equal than");
+            }
+            else
+            {
+                cboCriteria.Items.Clear();
+                cboCriteria.Items.Add("Starts with");
+                cboCriteria.Items.Add("Ends with");
+                cboCriteria.Items.Add("Contains");
+            }
         }
     }
 }

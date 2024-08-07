@@ -38,6 +38,12 @@
             this.lblFilter = new System.Windows.Forms.Label();
             this.txbFilter = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
+            this.lblField = new System.Windows.Forms.Label();
+            this.cboField = new System.Windows.Forms.ComboBox();
+            this.lblCriteria = new System.Windows.Forms.Label();
+            this.cboCriteria = new System.Windows.Forms.ComboBox();
+            this.lblAdFilter = new System.Windows.Forms.Label();
+            this.txbAdFilter = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPokemons)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxPokemon)).BeginInit();
             this.SuspendLayout();
@@ -50,13 +56,13 @@
             this.dgvPokemons.MultiSelect = false;
             this.dgvPokemons.Name = "dgvPokemons";
             this.dgvPokemons.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPokemons.Size = new System.Drawing.Size(567, 289);
+            this.dgvPokemons.Size = new System.Drawing.Size(685, 289);
             this.dgvPokemons.TabIndex = 0;
             this.dgvPokemons.SelectionChanged += new System.EventHandler(this.dgvPokemons_SelectionChanged);
             // 
             // pbxPokemon
             // 
-            this.pbxPokemon.Location = new System.Drawing.Point(606, 81);
+            this.pbxPokemon.Location = new System.Drawing.Point(703, 81);
             this.pbxPokemon.Name = "pbxPokemon";
             this.pbxPokemon.Size = new System.Drawing.Size(327, 289);
             this.pbxPokemon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -108,20 +114,22 @@
             this.lblFilter.AutoSize = true;
             this.lblFilter.Location = new System.Drawing.Point(12, 56);
             this.lblFilter.Name = "lblFilter";
-            this.lblFilter.Size = new System.Drawing.Size(32, 13);
+            this.lblFilter.Size = new System.Drawing.Size(63, 13);
             this.lblFilter.TabIndex = 6;
-            this.lblFilter.Text = "Filter:";
+            this.lblFilter.Text = "Quick Filter:";
             // 
             // txbFilter
             // 
-            this.txbFilter.Location = new System.Drawing.Point(53, 53);
+            this.txbFilter.Location = new System.Drawing.Point(81, 53);
             this.txbFilter.Name = "txbFilter";
             this.txbFilter.Size = new System.Drawing.Size(169, 20);
             this.txbFilter.TabIndex = 7;
+            this.txbFilter.TextChanged += new System.EventHandler(this.txbFilter_TextChanged);
+            this.txbFilter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbFilter_KeyPress);
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(228, 51);
+            this.btnSearch.Location = new System.Drawing.Point(618, 441);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 8;
@@ -129,11 +137,70 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
+            // lblField
+            // 
+            this.lblField.AutoSize = true;
+            this.lblField.Location = new System.Drawing.Point(15, 446);
+            this.lblField.Name = "lblField";
+            this.lblField.Size = new System.Drawing.Size(29, 13);
+            this.lblField.TabIndex = 9;
+            this.lblField.Text = "Field";
+            // 
+            // cboField
+            // 
+            this.cboField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboField.FormattingEnabled = true;
+            this.cboField.Location = new System.Drawing.Point(76, 442);
+            this.cboField.Name = "cboField";
+            this.cboField.Size = new System.Drawing.Size(121, 21);
+            this.cboField.TabIndex = 10;
+            this.cboField.SelectedIndexChanged += new System.EventHandler(this.cboField_SelectedIndexChanged);
+            // 
+            // lblCriteria
+            // 
+            this.lblCriteria.AutoSize = true;
+            this.lblCriteria.Location = new System.Drawing.Point(223, 446);
+            this.lblCriteria.Name = "lblCriteria";
+            this.lblCriteria.Size = new System.Drawing.Size(39, 13);
+            this.lblCriteria.TabIndex = 11;
+            this.lblCriteria.Text = "Criteria";
+            // 
+            // cboCriteria
+            // 
+            this.cboCriteria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCriteria.FormattingEnabled = true;
+            this.cboCriteria.Location = new System.Drawing.Point(284, 442);
+            this.cboCriteria.Name = "cboCriteria";
+            this.cboCriteria.Size = new System.Drawing.Size(121, 21);
+            this.cboCriteria.TabIndex = 12;
+            // 
+            // lblAdFilter
+            // 
+            this.lblAdFilter.AutoSize = true;
+            this.lblAdFilter.Location = new System.Drawing.Point(431, 446);
+            this.lblAdFilter.Name = "lblAdFilter";
+            this.lblAdFilter.Size = new System.Drawing.Size(29, 13);
+            this.lblAdFilter.TabIndex = 13;
+            this.lblAdFilter.Text = "Filter";
+            // 
+            // txbAdFilter
+            // 
+            this.txbAdFilter.Location = new System.Drawing.Point(492, 442);
+            this.txbAdFilter.Name = "txbAdFilter";
+            this.txbAdFilter.Size = new System.Drawing.Size(100, 20);
+            this.txbAdFilter.TabIndex = 14;
+            // 
             // AdoPokeApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(945, 450);
+            this.ClientSize = new System.Drawing.Size(1042, 493);
+            this.Controls.Add(this.txbAdFilter);
+            this.Controls.Add(this.lblAdFilter);
+            this.Controls.Add(this.cboCriteria);
+            this.Controls.Add(this.lblCriteria);
+            this.Controls.Add(this.cboField);
+            this.Controls.Add(this.lblField);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txbFilter);
             this.Controls.Add(this.lblFilter);
@@ -165,6 +232,12 @@
         private System.Windows.Forms.Label lblFilter;
         private System.Windows.Forms.TextBox txbFilter;
         private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Label lblField;
+        private System.Windows.Forms.ComboBox cboField;
+        private System.Windows.Forms.Label lblCriteria;
+        private System.Windows.Forms.ComboBox cboCriteria;
+        private System.Windows.Forms.Label lblAdFilter;
+        private System.Windows.Forms.TextBox txbAdFilter;
     }
 }
 
