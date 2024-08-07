@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using domain;
 using service;
+using System.Configuration;
 
 
 namespace AdoPokeApp
@@ -16,6 +18,7 @@ namespace AdoPokeApp
     public partial class frmPokeRegister : Form
     {
         private Pokemon pokemon = null;
+        private OpenFileDialog file = null;
         public frmPokeRegister()
         {
             InitializeComponent();
@@ -58,7 +61,10 @@ namespace AdoPokeApp
                 {
                     service.add(pokemon);
                     MessageBox.Show("Added successfully");
-                }                                    
+                }     
+                
+                if(file != null && !(txbUrlImage.Text.ToUpper().Contains("HTTP")))
+                    File.Copy(file.FileName, ConfigurationManager.AppSettings["images-folder"] + file.SafeFileName);
 
                 Close();
 
@@ -117,6 +123,19 @@ namespace AdoPokeApp
             {
 
                 pbxPokemon.Load("https://pbs.twimg.com/media/ERPDVqzWAAUwLRl.png");
+            }
+        }
+
+        private void btnAddImage_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog file = new OpenFileDialog();
+            file .Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+            if(file.ShowDialog() == DialogResult.OK)
+            {
+                txbUrlImage.Text = file.FileName;
+                loadImage(file.FileName);
+
+                //File.Copy(file.FileName, ConfigurationManager.AppSettings["images-folder"] + file.SafeFileName);
             }
         }
     }
